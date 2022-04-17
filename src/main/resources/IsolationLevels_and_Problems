@@ -1,0 +1,59 @@
+Transaction 1: 
+
+SELECT * from Developer where id = 1; 1 Peter
+// performs some operation
+//
+//
+//
+//
+SELECT * from Developer where id = 1; 1 Robin // Non Repeatable Read
+
+
+Transaction 2:
+
+Update developer set devName = 'Robin' where id=1
+
+
+DEVELOPER
+Id	devName
+1	Peter
+2	Lucy
+3	Judy
+
+
+// Phantom Read
+
+Transaction 1: 
+
+SELECT * from Developer; // 2 records
+// performs some operation
+//
+//
+//
+//
+SELECT * from Developer;// 3 records
+
+
+Transaction 2:
+
+insert into developer values (3,'Judy');
+
+// Isolation Levels
+@Transactional(isolation = Isolation.SERIALIZABLE)
+
+//1) Read Uncommitted -> No
+//2) Read Committed -> Dirty Read (puts a lock on the value/values used by transaction 1) (Most recommended)
+//3) Repeatable Read -> Dirty Read, Non Repeatable Read (puts a lock on the entire row)
+//4) Serializable -> Dirty Read, Non Repeatable Read, Phantom Read
+
+
+// Account
+NO	Name	Amount
+1	A	100
+2	B	50
+3	C	0
+
+
+
+
+

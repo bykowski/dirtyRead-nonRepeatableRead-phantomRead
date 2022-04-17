@@ -1,0 +1,26 @@
+// Propagation Levels
+
+// Required
+// REQUIRES_NEW
+
+@Transactional(propagation=propagation.REQUIRED)
+public void createTicket(){ // outer method
+
+// code to create a ticket (db call) (success)
+   showTicket(); // inner method
+}
+
+@Transactional(propagation=propagation.REQUIRES_NEW)
+public void showTicket(){
+
+
+// code to fetch ticket and display (db call)
+
+}
+
+// Scenarios:
+
+1) Both ticket creation and display should happen, if any fail, then roll back
+2) Ticket creation success, but ticket show fail, then do not roll back
+
+
